@@ -1,8 +1,11 @@
 var express = require('express');
 var app = express();
+var server;
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/public/html/start.html');
+    res.sendFile(__dirname + '/static/html/start.html');
 });
 
-app.listen(process.env.PORT || 3000);
+server = app.listen(process.env.PORT || 3000, function () {
+    console.log('Server running on port ' + server.address().port);
+});
