@@ -1,0 +1,14 @@
+{
+    "name": "youbetter-server",
+    "version": "0.0.1",
+    "description": "A Node.js app using Express powering http://youbetter.today",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/youbetter/server.git"
+    },
+    "license": "MIT"
+}
