@@ -1,17 +1,20 @@
 {
-    "name": "youbetter-server",
-    "version": "0.0.1",
-    "description": "A Node.js app using Express powering http://youbetter.today",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js"
-    },
-    "engines": {
-        "node": "4.2.1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/youbetter/server.git"
-    },
-    "license": "MIT"
+  "name": "youbetter-server",
+  "version": "0.0.1",
+  "description": "A Node.js app using Express powering http://youbetter.today",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "4.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/youbetter/server.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
 }
