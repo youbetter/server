@@ -4,7 +4,7 @@
   "description": "A Node.js app using Express powering http://youbetter.today",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node --debug --harmony index.js"
   },
   "engines": {
     "node": "4.2.1"
@@ -15,6 +15,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "express": "^4.13.3"
+    "koa": "^1.1.2",
+    "koa-router": "^5.2.3",
+    "koa-sendfile": "^1.1.1"
   }
 }
