@@ -4,6 +4,7 @@
   "description": "A Node.js app using Koa powering http://youbetter.today",
   "main": "index.js",
   "scripts": {
+    "test": "mocha",
     "start": "node --debug --harmony index.js"
   },
   "engines": {
@@ -18,5 +19,9 @@
     "koa": "^1.1.2",
     "koa-router": "^5.2.3",
     "koa-sendfile": "^1.1.1"
+  },
+  "devDependencies": {
+    "co-mocha": "^1.1.2",
+    "mocha": "^2.3.3"
   }
 }
