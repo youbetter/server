@@ -1,7 +1,7 @@
 {
   "name": "youbetter-server",
   "version": "0.0.1",
-  "description": "A Node.js app using Express powering http://youbetter.today",
+  "description": "A Node.js app using Koa powering http://youbetter.today",
   "main": "index.js",
   "scripts": {
     "start": "node --debug --harmony index.js"
