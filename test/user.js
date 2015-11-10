@@ -62,7 +62,8 @@ describe('User Model', function () {
 
         return User.create({
             firstName: 'Neil',
-            lastName: 'Armstrong'
+            lastName: 'Armstrong',
+            password: 'secret'
         }).then(function (user) {
             assert.equal(user.firstName, 'Neil', 'should have set the first name');
             assert.equal(user.lastName, 'Armstrong', 'should have set the last name');

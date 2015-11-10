@@ -14,7 +14,7 @@ module.exports = {
             primaryKey: true,
             type: 'string',
             unique: true,
-            uuid: true
+            uuidv4: true
         },
         isPassword: function (password, cb) {
             bcrypt.compare(password, this.password, cb);
