@@ -1,1 +1,1 @@
-web: node --harmony index.js
+web: node --debug --harmony index.js

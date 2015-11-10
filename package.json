@@ -4,7 +4,7 @@
   "description": "A Node.js app using Koa powering http://youbetter.today",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --harmony",
     "start": "node --debug --harmony index.js"
   },
   "engines": {
@@ -16,9 +16,14 @@
   },
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "koa": "^1.1.2",
     "koa-router": "^5.2.3",
-    "koa-sendfile": "^1.1.1"
+    "koa-sendfile": "^1.1.1",
+    "sails-memory": "^0.10.5",
+    "sails-mongo": "^0.11.4",
+    "uuid": "^2.0.1",
+    "waterline": "^0.10.26"
   },
   "devDependencies": {
     "co-mocha": "^1.1.2",
