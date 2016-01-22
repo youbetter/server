@@ -1,22 +1,11 @@
-var app = require('koa')();
-var router = require('koa-router')();
-var sendfile = require('koa-sendfile');
-var server;
+var express = require('express');
 
-router.get('/', function *(next) {
-    console.log(__dirname + '/static/html/start.html');
+var app = express();
 
-    yield* sendfile.call(this, __dirname + '/static/html/start.html');
-    
-    if (!this.status) {
-        this.throw(404);
-    }
+app.get('/', function(req, res) {
+    res.send('hello world');
 });
 
-app
-.use(router.routes())
-.use(router.allowedMethods());
+app.use(express.static('www'));
 
-server = app.listen(process.env.PORT || 3000, function () {
-    console.log('Server running on port ' + server.address().port);
-});
+app.listen(process.env.PORT || 3000);
