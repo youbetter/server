@@ -62,14 +62,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static('www'));
 
-app .get('auth/facebook/callback', passport.authenticate('facebook', {
+app .get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/',
     failureRedirect: '/welcome'
 }));
 
-app.get('auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook'));
 
-app.get('welcome', function (req, res) {
+app.get('/welcome', function (req, res) {
     res.render('welcome');
 });
 
