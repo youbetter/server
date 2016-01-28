@@ -4,7 +4,7 @@
   "description": "A Node.js app using Koa powering http://youbetter.today",
   "main": "index.js",
   "scripts": {
-    "start": "node --debug --harmony index.js"
+    "start": "node-debug --harmony -r dotenv/config index.js"
   },
   "engines": {
     "node": "4.2.1"
@@ -17,11 +17,13 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "cookie-parser": "^1.4.1",
+    "dotenv": "^2.0.0",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "method-override": "^2.3.5",
     "passport": "^0.3.2",
-    "passport-facebook": "^2.0.0"
+    "passport-facebook": "^2.0.0",
+    "request": "^2.67.0"
   }
 }

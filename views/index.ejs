@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>YOU BETTER</title>
+        <link rel="stylesheet" href="/lib/youbetter-desktop-app/styles.css" />
     </head>
     <body>
-        <p>ID: <%= user.id %></p>
-        <p>Username: <%= user.username %></p>
-        <p>Name: <%= user.displayName %></p>
+        <div id="you-better"></div>
+        <script src="/lib/youbetter-desktop-app/bundle.js"></script>
+        <script>youBetter(document.getElementById('you-better'), { COUCHDB_URL: '<%= url %>' });</script>
     </body>
 </html>
