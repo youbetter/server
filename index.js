@@ -1,6 +1,6 @@
-// TECHNICAL DEBT!!!
-// TODO remove when you figure out how to work with Foreman and node-debug locally
-require('dotenv').config();
+if (process.env.NODE_ENV === 'development') {
+    require('dotenv').config();
+}
 
 var express = require('express');
 var passport = require('passport');
@@ -14,10 +14,6 @@ var crypto = require('crypto');
 
 var app = express();
 var server;
-
-function allowInspection (req, res, next) {
-    return next();
-}
 
 // TECHNICAL DEBT!!!
 // TODO Reexamine whether this middleware -- which you copied from an example on the Passport site --
@@ -141,7 +137,11 @@ passport.use(new FacebookStrategy(
     {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: 'http://localhost:3000/auth/facebook/callback'
+        callbackURL: [
+            'http://',
+            (process.env.NODE_ENV === 'development' ? 'localhost:3000' : 'youbetter.today' ),
+            '/auth/facebook/callback'
+        ].join('')
     },
     initializeUser
 ));
@@ -177,7 +177,7 @@ app.use(passport.session());
 app.use(express.static('www'));
 
 // A landing page with login and marketing info
-app.get('/welcome', allowInspection, function (req, res) {
+app.get('/welcome', function (req, res) {
     res.render('welcome');
 });
 
@@ -192,10 +192,10 @@ app.get('/logout', function (req, res) {
 });
 
 // Initiates OAuth with Facebook API
-app.get('/auth/facebook', allowInspection, passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook'));
 
 // Called by Facebook after OAuth is complete
-app.get('/auth/facebook/callback', allowInspection, passport.authenticate('facebook', {
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/',
     failureRedirect: '/welcome'
 }));
@@ -204,7 +204,7 @@ app.get('/auth/facebook/callback', allowInspection, passport.authenticate('faceb
 // TODO Ideally this would be cacheable to allow offline work with above caveat
 // Would the combination of the right http header with the appropriate response code 
 // do the trick for caching?
-app.get('/', allowInspection, ensureAuthenticated, function (req, res) {
+app.get('/', ensureAuthenticated, function (req, res) {
     res.render('index', {
         url: req.user.url
     });
