@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node-debug --harmony index.js",
-    "postinstall": "grunt build"
+    "postinstall": "node ./scripts/build.js"
   },
   "engines": {
     "node": "4.2.1"
