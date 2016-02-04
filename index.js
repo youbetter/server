@@ -15,16 +15,12 @@ var crypto = require('crypto');
 var app = express();
 var server;
 
-// TECHNICAL DEBT!!!
-// TODO Reexamine whether this middleware -- which you copied from an example on the Passport site --
-// is an appropriate way to handle redirection when an unathenticated user tries to access protected resources.
-// What about the correct response header.
 function ensureAuthenticated (req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
 
-    res.redirect('/welcome')
+    res.redirect(401, '/welcome')
 }
 
 function initializeUser (accessToken, refreshToken, profile, done) {
@@ -181,7 +177,6 @@ app.get('/welcome', function (req, res) {
     res.render('welcome');
 });
 
-// TODO This URL should be passed via configuration when building the web app.
 // Destroy the session, clear the cookie and redirect to the welcome page
 app.get('/logout', function (req, res) {
     req.session.destroy(function () {
@@ -189,6 +184,38 @@ app.get('/logout', function (req, res) {
         // TODO This redirect should force the cache to be overridden.
         res.redirect('/');
     });
+});
+
+// Return the database url based on the user id and access token
+// generating it if it doesn't exist
+// Request should contain req.query.token and req.query.user
+// e.g. /database?token=1234543456567&user=876787678
+// TODO Error handling
+// TODO Needs HTTPS
+app.get('/database', function (req, res) {
+    if (!req.query.user || !req.query.token) {
+        res.status(400).send('Missing token or user query parameters');
+    }
+
+    // Authenticate the token with Facebook
+    request.get(
+        {
+            url: 'https://graph.facebook.com/debug_token',
+            qs: {
+                input_token: req.query.token,
+                access_token: process.env.FACEBOOK_APP_ID + '|' + process.env.FACEBOOK_APP_SECRET
+            }
+        },
+        function (err, debugRes) {
+            var tokenData = JSON.parse(debugRes.body).data
+
+            if (tokenData.app_id === process.env.FACEBOOK_APP_ID && tokenData.user_id === req.query.user) {
+                initializeUser(req.query.token, null, { id: req.query.user }, function (err, user) {
+                    res.type('application/json').send(user);
+                }); 
+            }
+        }
+    )
 });
 
 // Initiates OAuth with Facebook API

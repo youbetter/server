@@ -4,7 +4,7 @@
   "description": "Cloud services for http://youbetter.today",
   "main": "index.js",
   "scripts": {
-    "start": "node-debug --harmony index.js",
+    "start": "NODE_ENV=development node-debug --harmony index.js",
     "postinstall": "node ./scripts/build.js"
   },
   "engines": {
