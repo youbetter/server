@@ -115,6 +115,7 @@ function initializeUser (accessToken, refreshToken, profile, done) {
             password = cipher.final('utf8');
             
             done(null, {
+                id: username,
                 url: [
                     urlFragments.shift(),
                     '://',
@@ -233,6 +234,7 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', {
 // do the trick for caching?
 app.get('/', ensureAuthenticated, function (req, res) {
     res.render('index', {
+        id: req.user.id,
         url: req.user.url
     });
 });
